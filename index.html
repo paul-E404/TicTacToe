@@ -1,14 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- Embed Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="script.js"></script>
     <title>Tic Tac Toe</title>
 </head>
+
 <body>
-    
+    <div class="container">
+
+        <div class="player-panel">
+            <div id="player-1">
+                <img src="img/circle.png" alt="circle">
+                <span>Player 1</span>
+            </div>
+            <div id="player-2" class="player-inactive">
+                <img src="img/cross.png" alt="cross">
+                <span>Player 2</span>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    <div onclick="setShape(0)" class="shape-box">
+                        <img id="circle-0" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-0" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+                <td>
+                    <div onclick="setShape(1)" class="shape-box">
+                        <img id="circle-1" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-1" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+                <td>
+                    <div onclick="setShape(2)" class="shape-box">
+                        <img id="circle-2" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-2" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div onclick="setShape(3)" class="shape-box">
+                        <img id="circle-3" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-3" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+                <td>
+                    <div onclick="setShape(4)" class="shape-box">
+                        <img id="circle-4" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-4" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+                <td>
+                    <div onclick="setShape(5)" class="shape-box">
+                        <img id="circle-5" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-5" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div onclick="setShape(6)" class="shape-box">
+                        <img id="circle-6" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-6" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+                <td>
+                    <div onclick="setShape(7)" class="shape-box">
+                        <img id="circle-7" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-7" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+                <td>
+                    <div onclick="setShape(8)" class="shape-box">
+                        <img id="circle-8" class="shape d-none" src="img/circle.png" alt="circle">
+                        <img id="cross-8" id="circle" class="shape d-none" src="img/cross.png" alt="cross">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </body>
+
 </html>
