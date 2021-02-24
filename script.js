@@ -1,10 +1,13 @@
 let field = [];
+let gameOver = false;
 let currentShape = 'cross';
+let counter = 0;
 
 function setShape(id) {
 
-    /* If field[id] is undefined, do something */
-    if(!field[id]){
+    /* If field[id] is undefined and gameOver is not true, do something */
+    /* I could also write "if(...  && !gameOver == true)" */
+    if(!field[id] && gameOver == false){
         if(currentShape == 'cross') {
             currentShape = 'circle';
         } else {
@@ -13,6 +16,7 @@ function setShape(id) {
     
         field[id] = currentShape;
         document.getElementById(currentShape + '-' + id).classList.remove('d-none');
+        counter++;
         checkForWinner();
         showActivePlayer();
     }
@@ -79,7 +83,57 @@ function checkForWinner() {
 
     /* !! Convert to boolen */
     if(!!winner) {
-        console.log("Gewinner: " + winner);
+        gameOver = true;
+        showGameOver();
+    }
+    else if(counter == 9) {
+        alert("Unentschieden!");
     }
 
+}
+
+function showGameOver(){
+    setTimeout(function(){
+        document.getElementById('game-over').classList.remove('d-none');
+    }, 1000);
+    showWinner();
+    showRestartButton();
+};
+
+function showWinner() {
+   /* follows... */
+}
+
+function showRestartButton() {
+    setTimeout(function(){
+        document.getElementById('restart-btn').classList.remove('d-none');
+    }, 2000);
+}
+
+function restart() {
+    gameOver = false;
+    field = [];
+    currentShape = 'cross';
+    counter = 0;
+    hideElementsForRestart();
+}
+
+function hideElementsForRestart() {
+
+    document.getElementById('game-over').classList.add('d-none');
+    document.getElementById('restart-btn').classList.add('d-none');
+    
+    for (let i = 0; i < 9; i++) {
+        document.getElementById('circle-' + i).classList.add('d-none');     
+        document.getElementById('cross-' + i).classList.add('d-none');   
+    }
+
+    document.getElementById('first-row').style.transform = 'scaleX(0)';
+    document.getElementById('second-row').style.transform = 'scaleX(0)';
+    document.getElementById('third-row').style.transform = 'scaleX(0)';
+    document.getElementById('first-column').style.transform = 'scaleY(0)';
+    document.getElementById('second-column').style.transform = 'scaleY(0)';
+    document.getElementById('third-column').style.transform = 'scaleY(0)';
+    document.getElementById('first-diagonal').style.transform = 'scale(0)';
+    document.getElementById('second-diagonal').style.transform = 'scale(0)';
 }

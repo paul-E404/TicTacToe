@@ -2,12 +2,14 @@
     --td-size: 100px;
     --color-primary: rgb(9, 9, 59);
     --color-secondary: rgb(26, 26, 89);
+    --color-light: rgb(252, 246, 184);
     --color-hover: rgba(26, 26, 89, 0.1);
 }
 
 body {
     /* font-family: 'Codystar', cursive; */
     font-family: 'Quicksand', sans-serif;
+    margin: 0;
 }
 
 .d-none {
@@ -60,6 +62,7 @@ td {
 .line {
     background-color: turquoise;
     position: absolute;
+    z-index: 1;
 }
 
 .horizontal {
@@ -130,4 +133,48 @@ tr td:last-child {
 
 .circle {
     z-index: 2;
+}
+
+.game-over {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    z-index: 2;
+    object-position: 50% 100%;
+    animation: zoomIn 500ms ease-in-out;
+}
+
+.restart-btn {
+    z-index: 2;
+    color: var(--color-light);
+    font-size: 32px;
+    font-family: inherit;
+    background-color: var(--color-secondary);
+    border: 2px solid var(--color-light);
+    border-radius: 5px;
+    padding: 8px 16px;
+    position: absolute;
+    top: 20%;
+    animation: zoomIn 500ms ease-in-out;
+}
+
+
+.restart-btn:hover {
+    background-color: var(--color-primary);
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--color-light);
+}
+
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
