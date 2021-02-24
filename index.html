@@ -29,68 +29,78 @@
             </div>
         </div>
 
-        <table>
-            <tr>
-                <td>
-                    <div onclick="setShape(0)" class="shape-box">
-                        <img id="circle-0" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-0" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-                <td>
-                    <div onclick="setShape(1)" class="shape-box">
-                        <img id="circle-1" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-1" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-                <td>
-                    <div onclick="setShape(2)" class="shape-box">
-                        <img id="circle-2" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-2" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div onclick="setShape(3)" class="shape-box">
-                        <img id="circle-3" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-3" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-                <td>
-                    <div onclick="setShape(4)" class="shape-box">
-                        <img id="circle-4" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-4" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-                <td>
-                    <div onclick="setShape(5)" class="shape-box">
-                        <img id="circle-5" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-5" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div onclick="setShape(6)" class="shape-box">
-                        <img id="circle-6" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-6" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-                <td>
-                    <div onclick="setShape(7)" class="shape-box">
-                        <img id="circle-7" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-7" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-                <td>
-                    <div onclick="setShape(8)" class="shape-box">
-                        <img id="circle-8" class="shape d-none" src="img/circle.png" alt="circle">
-                        <img id="cross-8" id="circle" class="shape d-none" src="img/cross.png" alt="cross">
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="table-div">
+            <div id="first-row" class="line horizontal" style="transform: scaleX(0)"></div>
+            <div id="second-row" class="line horizontal" style="top: 48.6%; transform: scaleX(0);"></div>
+            <div id="third-row" class="line horizontal" style="top: 82.5%; transform: scaleX(0);"></div>
+            <div id="first-column" class="line vertical" style="transform: scaleY(0)"></div>
+            <div id="second-column" class="line vertical" style="left: 48.5%; transform: scaleY(0);"></div>
+            <div id="third-column" class="line vertical" style="left: 82.5%; transform: scaleY(0);"></div>
+            <div id="first-diagonal" class="line diagonal diagonal-up-down" style="transform: scale(0) rotate(45deg)"></div>
+            <div id="second-diagonal" class="line diagonal diagonal-down-up" style="transform: scale(0) rotate(-45deg)"></div>
+            <table>
+                <tr>
+                    <td>
+                        <div onclick="setShape(0)" class="shape-box">
+                            <img id="circle-0" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-0" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                    <td>
+                        <div onclick="setShape(1)" class="shape-box">
+                            <img id="circle-1" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-1" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                    <td>
+                        <div onclick="setShape(2)" class="shape-box">
+                            <img id="circle-2" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-2" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div onclick="setShape(3)" class="shape-box">
+                            <img id="circle-3" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-3" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                    <td>
+                        <div onclick="setShape(4)" class="shape-box">
+                            <img id="circle-4" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-4" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                    <td>
+                        <div onclick="setShape(5)" class="shape-box">
+                            <img id="circle-5" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-5" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div onclick="setShape(6)" class="shape-box">
+                            <img id="circle-6" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-6" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                    <td>
+                        <div onclick="setShape(7)" class="shape-box">
+                            <img id="circle-7" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-7" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                    <td>
+                        <div onclick="setShape(8)" class="shape-box">
+                            <img id="circle-8" class="shape d-none" src="img/circle.png" alt="circle">
+                            <img id="cross-8" id="circle" class="shape d-none" src="img/cross.png" alt="cross">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
 </body>

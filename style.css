@@ -53,6 +53,41 @@ td {
     padding: 0;
 }
 
+.table-div {
+    position: relative;
+}
+
+.line {
+    background-color: turquoise;
+    position: absolute;
+}
+
+.horizontal {
+    height: 10px;
+    width: calc(var(--td-size)*3.5);
+    top: 15%;
+    left: -5.5%;
+    transform: scaleX(0);
+    transition: transform 225ms ease-in-out;
+}
+
+.vertical {
+    height: calc(var(--td-size)*3.5);
+    width: 10px;
+    top: -5.5%;
+    left: 14.6%;
+    transform: scaleY(0);
+    transition: transform 225ms ease-in-out;
+}
+
+.diagonal {
+    height: 10px;
+    width: calc(var(--td-size)*4.8);
+    top: 48.6%;
+    left: -27%;
+    transition: transform 225ms ease-in-out;
+}
+
 table tr:first-child td {
     border-top: 0;
 }
