@@ -2,6 +2,53 @@ let field = [];
 let gameOver = false;
 let currentShape = 'cross';
 let counter = 0;
+let animationTime = 500;
+
+function blinkLogo() {
+    setTimeout(function(){
+        document.getElementById('light1').classList.remove('no-shadow');
+    }, animationTime*1);
+    setTimeout(function(){
+        document.getElementById('light1').classList.add('no-shadow');
+    }, animationTime*2);
+    setTimeout(function(){
+        document.getElementById('light2').classList.remove('no-shadow');
+    }, animationTime*3);
+    setTimeout(function(){
+        document.getElementById('light2').classList.add('no-shadow');
+    }, animationTime*4);
+    setTimeout(function(){
+        document.getElementById('light3').classList.remove('no-shadow');
+    }, animationTime*5);
+    setTimeout(function(){
+        document.getElementById('light3').classList.add('no-shadow');
+    }, animationTime*6);
+    setTimeout(function(){
+        document.getElementById('light1').classList.remove('no-shadow');
+        document.getElementById('light2').classList.remove('no-shadow');
+        document.getElementById('light3').classList.remove('no-shadow');
+    }, animationTime*7);
+    setTimeout(function(){
+        document.getElementById('light1').classList.add('no-shadow');
+        document.getElementById('light2').classList.add('no-shadow');
+        document.getElementById('light3').classList.add('no-shadow');
+        blinkLogo();
+    }, animationTime*9);
+    
+}
+
+function setNames(){
+    let name1 = document.getElementById('input-name1').value;
+    let name2 = document.getElementById('input-name2').value;
+    document.getElementById('player-1-name').innerHTML = name1;
+    document.getElementById('player-2-name').innerHTML = name2;
+    startGame();
+}
+
+function startGame() {
+    document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('navbar-text-start').classList.remove('navbar-text-start');
+}
 
 function setShape(id) {
 
@@ -103,11 +150,13 @@ function showGameOver(winner){
 };
 
 function showWinner(winner) {
+    let name1 = document.getElementById('player-1-name').innerText;
+    let name2 = document.getElementById('player-2-name').innerText;
     if(winner == 'circle') {
-        document.getElementById('winner-box').innerHTML = 'WINNER: Player 1';
+        document.getElementById('winner-box').innerHTML = 'WINNER: ' + name1;
     }
     else if(winner == 'cross') {
-        document.getElementById('winner-box').innerHTML = 'WINNER: Player 2';
+        document.getElementById('winner-box').innerHTML = 'WINNER: ' + name2;
     } 
     setTimeout(function(){
         document.getElementById('winner-box').classList.remove('d-none');
@@ -147,4 +196,13 @@ function hideElementsForRestart() {
     document.getElementById('third-column').style.transform = 'scaleY(0)';
     document.getElementById('first-diagonal').style.transform = 'scale(0)';
     document.getElementById('second-diagonal').style.transform = 'scale(0)';
+}
+
+/**
+* Prevents the reload of the page when the submit button in the message-form is clicked.
+*/
+function preventReload() {
+    var form = document.getElementById("form");
+    function handleForm(event) { event.preventDefault(); }
+    form.addEventListener('submit', handleForm);
 }

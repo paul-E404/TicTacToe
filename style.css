@@ -1,13 +1,15 @@
 :root {
     --td-size: 100px;
     --color-primary: rgb(9, 9, 59);
+    --color-bg: rgba(26, 26, 89, 0.95);
     --color-secondary: rgb(26, 26, 89);
-    --color-tertiary: rgb(254, 116, 0);
     --color-light: rgb(252, 246, 184);
+    --color-light2: rgb(255, 146, 208);
+    --color-light3: rgb(158, 248, 85);
     --color-hover: rgba(26, 26, 89, 0.1);
     --container-width: 61.8%;
     --navbar-height: 50px;
-    --footer-height: 50px;
+    --footer-height: 40px;
 }
 
 body {
@@ -19,7 +21,18 @@ body {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
+}
+
+.start-screen{
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .background-image {
@@ -36,7 +49,85 @@ body {
     right: 0;
     height: var(--navbar-height);
     background-color: var(--color-primary);
+    border-bottom: 3px solid var(--color-light);
+    display: flex;
+    align-items: center;
+}
+
+.navbar-text-start {
+    z-index: 1;
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+    margin-top: 250px;
+}
+
+.input-field {
+    border-radius: 5px;
+    border: none;
+    height: 24px;
+    font-family: inherit;
+    padding: 5px;
+}
+
+.play-btn {
+    color: var(--color-light);
+    font-size: 24px;
+    font-family: inherit;
+    background-color: var(--color-secondary);
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 8px 16px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.play-btn:hover {
+    cursor: pointer;
+    background-color: var(--color-hover);
+    box-shadow: 0 0 5px var(--color-light);
+}
+
+form {
+    height: 50%;
+    min-width: calc(var(--container-width)/2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.go-on-without-names:hover {
+    cursor: pointer;
+    text-shadow: 0 0 2px var(--color-light);
+}
+
+.logo {
     font-family: 'Codystar', cursive;
+    font-size: 2em;
+    font-weight: bold;
+    margin-left: 8px;
+}
+
+.light1 {
+    color: var(--color-light);
+    text-shadow: 0 0 15px var(--color-light);
+}
+
+.light2 {
+    color: var(--color-light2);
+    text-shadow: 0 0 15px var(--color-light2);
+}
+
+.light3 {
+    color: var(--color-light3);
+    text-shadow: 0 0 15px var(--color-light3);
+}
+
+.no-shadow {
+    text-shadow: unset !important;
+    color: grey;
 }
 
 .container {
@@ -47,8 +138,7 @@ body {
     width: var(--container-width);
     margin-left: calc((100% - var(--container-width))/2);
     height: 100vh;
-    background-color: var(--color-primary);
-    opacity: 0.9;
+    background-color: var(--color-bg);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,7 +171,7 @@ table {
 td {
     height: var(--td-size);
     width: var(--td-size);
-    border: 3px solid white;
+    border: 3px dotted white;
     padding: 0;
 }
 
@@ -166,6 +256,25 @@ tr td:last-child {
     right: 0;
     height: var(--footer-height);
     background-color: var(--color-primary);
+    border-top: 3px solid var(--color-light);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 16px;
+}
+
+.footer a {
+    margin-left: 16px;
+    text-decoration: none;
+    color: white;
+}
+
+.footer a:last-child {
+    margin-right: 16px;
+}
+
+.footer a:hover {
+    text-shadow: 0 0 2px var(--color-light);
 }
 
 .game-over {

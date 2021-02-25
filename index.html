@@ -15,15 +15,31 @@
     <title>Tic Tac Toe</title>
 </head>
 
-<body>
+<body onload="blinkLogo();preventReload();">
 
     <div class="background-image">
     </div>
 
     <div class="container">
 
+        <div class="start-screen" id="start-screen">
+            <form id="form" action="">
+                <span>Enter your names:</span><br>
+                <label for="player-1">Player 1:</label>
+                <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1" required>
+                <label for="player-2">Player 2:</label>
+                <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2" required>
+                <button onclick="setNames();" type="submit" class="play-btn">Let's play!</button>
+                <span onclick="startGame()" id="go-on-without-names" class="go-on-without-names">Go on without names</span>
+            </form>
+        </div>
+
         <div class="navbar">
-            Tic Tac Toe
+            <div id="navbar-text-start" class="navbar-text-start">
+                <span id="light1" class="logo light1 no-shadow">Tic</span>
+                <span id="light2" class="logo light2 no-shadow">Tac</span>
+                <span id="light3" class="logo light3 no-shadow">Toe</span>
+            </div>
         </div>
 
         <img class="game-over d-none" id="game-over" src="img/game-over.jpg" alt="game-over">
@@ -37,11 +53,11 @@
         <div class="player-panel">
             <div id="player-1">
                 <img src="img/circle.png" alt="circle">
-                <span>Player 1</span>
+                <span id="player-1-name">Player 1</span>
             </div>
             <div id="player-2" class="player-inactive">
                 <img src="img/cross.png" alt="cross">
-                <span>Player 2</span>
+                <span id="player-2-name">Player 2</span>
             </div>
         </div>
 
@@ -52,8 +68,10 @@
             <div id="first-column" class="line vertical" style="transform: scaleY(0)"></div>
             <div id="second-column" class="line vertical" style="left: 48.5%; transform: scaleY(0);"></div>
             <div id="third-column" class="line vertical" style="left: 82.5%; transform: scaleY(0);"></div>
-            <div id="first-diagonal" class="line diagonal diagonal-up-down" style="transform: scale(0) rotate(45deg)"></div>
-            <div id="second-diagonal" class="line diagonal diagonal-down-up" style="transform: scale(0) rotate(-45deg)"></div>
+            <div id="first-diagonal" class="line diagonal diagonal-up-down" style="transform: scale(0) rotate(45deg)">
+            </div>
+            <div id="second-diagonal" class="line diagonal diagonal-down-up" style="transform: scale(0) rotate(-45deg)">
+            </div>
             <table>
                 <tr>
                     <td>
@@ -119,7 +137,9 @@
         </div>
 
         <footer class="footer">
-            © Paul Engerling
+            <span class="footer-text">©TicTacToe 2021</span>
+            <a href="#">Game Instructions</a>
+            <a href="#">Impressum</a>
         </footer>
 
     </div>
