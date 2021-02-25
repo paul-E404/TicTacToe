@@ -84,24 +84,34 @@ function checkForWinner() {
     /* !! Convert to boolen */
     if(!!winner) {
         gameOver = true;
-        showGameOver();
+        showGameOver(winner);
     }
     else if(counter == 9) {
-        alert("Unentschieden!");
+        gameOver = true;
+        showGameOver(winner);
     }
+    
 
 }
 
-function showGameOver(){
+function showGameOver(winner){
     setTimeout(function(){
         document.getElementById('game-over').classList.remove('d-none');
     }, 1000);
-    showWinner();
+    showWinner(winner);
     showRestartButton();
 };
 
-function showWinner() {
-   /* follows... */
+function showWinner(winner) {
+    if(winner == 'circle') {
+        document.getElementById('winner-box').innerHTML = 'WINNER: Player 1';
+    }
+    else if(winner == 'cross') {
+        document.getElementById('winner-box').innerHTML = 'WINNER: Player 2';
+    } 
+    setTimeout(function(){
+        document.getElementById('winner-box').classList.remove('d-none');
+    }, 1000);
 }
 
 function showRestartButton() {
@@ -121,6 +131,7 @@ function restart() {
 function hideElementsForRestart() {
 
     document.getElementById('game-over').classList.add('d-none');
+    document.getElementById('winner-box').classList.add('d-none');
     document.getElementById('restart-btn').classList.add('d-none');
     
     for (let i = 0; i < 9; i++) {

@@ -2,13 +2,19 @@
     --td-size: 100px;
     --color-primary: rgb(9, 9, 59);
     --color-secondary: rgb(26, 26, 89);
+    --color-tertiary: rgb(254, 116, 0);
     --color-light: rgb(252, 246, 184);
     --color-hover: rgba(26, 26, 89, 0.1);
+    --container-width: 61.8%;
+    --navbar-height: 50px;
+    --footer-height: 50px;
 }
 
 body {
     /* font-family: 'Codystar', cursive; */
     font-family: 'Quicksand', sans-serif;
+    color: white;
+    font-size: 18px;
     margin: 0;
 }
 
@@ -16,9 +22,33 @@ body {
     display: none;
 }
 
-.container {
-    width: 100%;
+.background-image {
+    background-image: url(img/background.jpg);
     height: 100vh;
+    background-size: cover;
+    background-position: 50% 36%;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    background-color: var(--color-primary);
+    font-family: 'Codystar', cursive;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: var(--container-width);
+    margin-left: calc((100% - var(--container-width))/2);
+    height: 100vh;
+    background-color: var(--color-primary);
+    opacity: 0.9;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,7 +81,7 @@ table {
 td {
     height: var(--td-size);
     width: var(--td-size);
-    border: 5px solid black;
+    border: 3px solid white;
     padding: 0;
 }
 
@@ -60,9 +90,11 @@ td {
 }
 
 .line {
-    background-color: turquoise;
+    background-color: var(--color-light);
     position: absolute;
-    z-index: 1;
+    z-index: 2;
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--color-light);
 }
 
 .horizontal {
@@ -127,12 +159,13 @@ tr td:last-child {
     height: 80%;
 }
 
-.cross {
-    z-index: 2;
-}
-
-.circle {
-    z-index: 2;
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--footer-height);
+    background-color: var(--color-primary);
 }
 
 .game-over {
@@ -141,13 +174,13 @@ tr td:last-child {
     height: 100vh;
     width: 100vw;
     object-fit: cover;
-    z-index: 2;
+    z-index: 3;
     object-position: 50% 100%;
     animation: zoomIn 500ms ease-in-out;
 }
 
 .restart-btn {
-    z-index: 2;
+    z-index: 3;
     color: var(--color-light);
     font-size: 32px;
     font-family: inherit;
@@ -165,6 +198,18 @@ tr td:last-child {
     background-color: var(--color-primary);
     cursor: pointer;
     box-shadow: 0 0 8px var(--color-light);
+}
+
+.winner-box {
+    width: 200px;
+    min-height: 100px;
+    color: white;
+    position: absolute;
+    top: 74%;
+    z-index: 3;
+    font-size: 24px;
+    text-align: center;
+    animation: zoomIn 500ms ease-in-out;
 }
 
 
