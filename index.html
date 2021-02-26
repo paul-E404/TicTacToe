@@ -32,7 +32,7 @@
                 <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2"
                     required>
                 <button onclick="setNames();" type="submit" class="play-btn">Let's play!</button>
-                <span onclick="startGame()" id="go-on-without-names" class="go-on-without-names">Go on without
+                <span onclick="startGame();" id="go-on-without-names" class="go-on-without-names">Go on without
                     names</span>
             </form>
         </div>
@@ -142,9 +142,16 @@
 
         </div>
 
+        <div id="game-instructions" class="game-instructions d-none">
+            <div class="game-instructions-content">
+                <span>Try to place three equal shapes in a row, a column or a diagonal. The first player to do this wins the game.</span><br>
+                <button onclick="toggleGameInstructions()" type="button" class="play-btn">Let's play!</button>
+            </div>
+        </div>
+
         <footer class="footer">
             <span class="footer-text">©TicTacToe 2021</span>
-            <a href="#">Game Instructions</a>
+            <a onclick="toggleGameInstructions()">Game Instructions</a>
             <a href="#">Impressum</a>
         </footer>
 

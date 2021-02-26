@@ -1,7 +1,7 @@
 :root {
     --td-size: 100px;
     --color-primary: rgb(9, 9, 59);
-    --color-bg: rgba(26, 26, 89, 0.95);
+    --color-bg: rgba(26, 26, 89, 0.9);
     --color-secondary: rgb(26, 26, 89);
     --color-light: rgb(252, 246, 184);
     --color-light2: rgb(255, 146, 208);
@@ -248,6 +248,18 @@ tr td:last-child {
 .shape {
     position: absolute;
     height: 80%;
+}
+
+.game-instructions {
+    position: absolute;
+    top: calc(var(--navbar-height) + 3px);
+    height: calc(100% - var(--navbar-height) - var(--footer-height));
+    width: 100%;
+    background-color: var(--color-primary);
+}
+
+.game-instructions-content {
+    padding: 40px;
 }
 
 .footer {

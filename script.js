@@ -234,6 +234,19 @@ function hideElementsForRestart() {
 }
 
 /**
+ * Toggles game instructions.
+ */
+function toggleGameInstructions () {
+    let gameInstructions = document.getElementById('game-instructions');
+    if(gameInstructions.classList.contains('d-none')) {
+        gameInstructions.classList.remove('d-none');
+    }
+    else {
+        gameInstructions.classList.add('d-none');
+    }
+}
+
+/**
 * Prevents the reload of the page when the submit button in the message-form is clicked.
 */
 function preventReload() {
