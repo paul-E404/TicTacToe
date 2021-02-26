@@ -24,7 +24,7 @@ body {
     display: none !important;
 }
 
-.start-screen{
+.start-screen {
     position: absolute;
     z-index: 1;
     height: 100%;
@@ -209,8 +209,8 @@ td {
 .diagonal {
     height: 10px;
     width: calc(var(--td-size)*4.8);
-    top: 48.6%;
-    left: -27%;
+    top: 48.1%;
+    left: -28.8%;
     transition: transform 225ms ease-in-out;
 }
 
@@ -303,7 +303,6 @@ tr td:last-child {
     animation: zoomIn 500ms ease-in-out;
 }
 
-
 .restart-btn:hover {
     background-color: var(--color-primary);
     cursor: pointer;
@@ -322,7 +321,6 @@ tr td:last-child {
     animation: zoomIn 500ms ease-in-out;
 }
 
-
 @keyframes zoomIn {
     from {
         opacity: 0;
@@ -337,18 +335,19 @@ tr td:last-child {
 /* Responsive Design */
 
 @media(max-width: 1200px) {
-   .restart-btn {
-       top: 30%;
-   }
+    .restart-btn {
+        top: 30%;
+    }
     .winner-box {
-       top: 80%;
-   }
-   .navbar-text-start {
-       font-size: 2em;
-   }
+        top: 80%;
+    }
+    .navbar-text-start {
+        font-size: 2em;
+    }
 }
 
 /* iPad & iPad Pro */
+
 @media (min-width: 768px) and (max-width: 1024px) and (min-height: 1024px) {
     body {
         font-size: 36px;
@@ -392,10 +391,12 @@ tr td:last-child {
     }
 }
 
-
 @media(max-width: 650px) {
     :root {
         --container-width: 80%;
+    }
+    .background-image {
+        background-position: 0% 36%;
     }
 }
 
@@ -431,6 +432,9 @@ tr td:last-child {
 }
 
 @media(max-width: 400px) {
+    :root {
+        --container-width: 100%;
+    }
     .player-panel div {
         margin-top: 20px;
         margin-left: 20px;
@@ -446,7 +450,6 @@ tr td:last-child {
 
 @media(max-width: 350px) {
     :root {
-        --container-width: 100%;
         --td-size: 75px;
     }
     .restart-btn {

@@ -26,11 +26,14 @@
             <form id="form" action="">
                 <span>Enter your names:</span><br>
                 <label for="player-1">Player 1:</label>
-                <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1" required><br>
+                <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1"
+                    required><br>
                 <label for="player-2">Player 2:</label>
-                <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2" required>
+                <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2"
+                    required>
                 <button onclick="setNames();" type="submit" class="play-btn">Let's play!</button>
-                <span onclick="startGame()" id="go-on-without-names" class="go-on-without-names">Go on without names</span>
+                <span onclick="startGame()" id="go-on-without-names" class="go-on-without-names">Go on without
+                    names</span>
             </form>
         </div>
 
@@ -62,6 +65,7 @@
         </div>
 
         <div class="table-div">
+
             <div id="first-row" class="line horizontal" style="transform: scaleX(0)"></div>
             <div id="second-row" class="line horizontal" style="top: 48.6%; transform: scaleX(0);"></div>
             <div id="third-row" class="line horizontal" style="top: 82.5%; transform: scaleX(0);"></div>
@@ -72,6 +76,7 @@
             </div>
             <div id="second-diagonal" class="line diagonal diagonal-down-up" style="transform: scale(0) rotate(-45deg)">
             </div>
+
             <table>
                 <tr>
                     <td>
@@ -134,6 +139,7 @@
                     </td>
                 </tr>
             </table>
+
         </div>
 
         <footer class="footer">
