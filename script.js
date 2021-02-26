@@ -153,10 +153,10 @@ function showWinner(winner) {
     let name1 = document.getElementById('player-1-name').innerText;
     let name2 = document.getElementById('player-2-name').innerText;
     if(winner == 'circle') {
-        document.getElementById('winner-box').innerHTML = 'WINNER: ' + name1;
+        document.getElementById('winner-box').innerHTML = 'WINNER: <br>' + name1;
     }
     else if(winner == 'cross') {
-        document.getElementById('winner-box').innerHTML = 'WINNER: ' + name2;
+        document.getElementById('winner-box').innerHTML = 'WINNER: <br>' + name2;
     } 
     setTimeout(function(){
         document.getElementById('winner-box').classList.remove('d-none');

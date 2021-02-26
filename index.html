@@ -26,7 +26,7 @@
             <form id="form" action="">
                 <span>Enter your names:</span><br>
                 <label for="player-1">Player 1:</label>
-                <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1" required>
+                <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1" required><br>
                 <label for="player-2">Player 2:</label>
                 <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2" required>
                 <button onclick="setNames();" type="submit" class="play-btn">Let's play!</button>
@@ -46,7 +46,7 @@
         <button onclick="restart()" class="restart-btn d-none" id="restart-btn">Play again!</button>
         <div id="winner-box" class="winner-box d-none">IT'S A TIE</div>
 
-        <div>
+        <div class="turn">
             It's your turn!
         </div>
 
