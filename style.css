@@ -280,6 +280,7 @@ tr td:last-child {
     margin-left: 16px;
     text-decoration: none;
     color: white;
+    cursor: pointer;
 }
 
 .footer a:last-child {

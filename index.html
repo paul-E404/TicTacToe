@@ -23,7 +23,7 @@
     <div class="container">
 
         <div class="start-screen" id="start-screen">
-            <form id="form" action="">
+            <form id="form" action="" onsubmit="setNames(); return false">
                 <span>Enter your names:</span><br>
                 <label for="player-1">Player 1:</label>
                 <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1"
@@ -31,7 +31,7 @@
                 <label for="player-2">Player 2:</label>
                 <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2"
                     required>
-                <button onclick="setNames();" type="submit" class="play-btn">Let's play!</button>
+                <button type="submit" class="play-btn">Let's play!</button>
                 <span onclick="startGame();" id="go-on-without-names" class="go-on-without-names">Go on without
                     names</span>
             </form>
