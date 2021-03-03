@@ -7,15 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" type="image/png" href="img/cross.png"/>
     <!-- Embed Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script src="./smallest_backend_ever-master/mini_backend.js"></script>
     <script src="script.js"></script>
     <title>Tic Tac Toe</title>
 </head>
 
-<body onload="blinkLogo();preventReload();">
+<body onload="blinkLogo();preventReload();saveToBackend();">
 
     <div class="background-image">
     </div>
@@ -77,8 +79,8 @@
             <div id="second-diagonal" class="line diagonal diagonal-down-up" style="transform: scale(0) rotate(-45deg)">
             </div>
 
-            <table>
-                <tr>
+            <table id="playing-field">
+                <!-- <tr>
                     <td>
                         <div onclick="setShape(0)" class="shape-box">
                             <img id="circle-0" class="shape d-none" src="img/circle.png" alt="circle">
@@ -137,7 +139,7 @@
                             <img id="cross-8" id="circle" class="shape d-none" src="img/cross.png" alt="cross">
                         </div>
                     </td>
-                </tr>
+                </tr> -->
             </table>
 
         </div>

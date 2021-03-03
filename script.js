@@ -3,6 +3,7 @@ let gameOver = false;
 let currentShape = 'cross';
 let counter = 0;
 let animationTime = 1000;
+let viewWelcomeScreen = true;
 
 /**
  * Animates the TIC TAC TOE logo with light and shadow.
@@ -36,23 +37,118 @@ function blinkLogo() {
 }
 
 /**
- * Puts the usernames into the player panel.
+ * Saves the usernames into the JSON array after filling out the input fields.
  */
 function setNames() {
     let name1 = document.getElementById('input-name1').value;
     let name2 = document.getElementById('input-name2').value;
-    document.getElementById('player-1-name').innerHTML = name1;
-    document.getElementById('player-2-name').innerHTML = name2;
+    game["player1"] = name1;
+    game["player2"] = name2;
+
+    /* Save JSON to backend */
+    saveToBackend();
+
     startGame();
 }
 
 /**
- * Hides the start screen when clicking the let's play button.
+ * Puts the usernames into the player panel.
+ */
+function showNames() {
+    console.log("showNames ausgeführt!");
+    document.getElementById('player-1-name').innerHTML = game["player1"];
+    document.getElementById('player-2-name').innerHTML = game["player2"];
+};
+
+/**
+ * Executes some start functions when clicking the let's play button.
  */
 function startGame() {
+    showNames();
+    hideWelcomeScreen();
+    showTable();
+}
+
+/**
+ * Hides the welcome screen.
+ */
+function hideWelcomeScreen() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('navbar-text-start').classList.remove('navbar-text-start');
+    /* Save changed game JSON to backend. */
+    game["viewWelcomeScreen"] = false;
+    saveToBackend();
 }
+
+function showTable() {
+    document.getElementById('playing-field').innerHTML = '';
+    document.getElementById('playing-field').innerHTML = createTable();
+}
+
+function createTable() {
+    return `
+        <tr>
+            <td>
+                <div onclick="setShape(0)" class="shape-box">
+                    <img id="circle-0" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-0" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+            <td>
+                <div onclick="setShape(1)" class="shape-box">
+                    <img id="circle-1" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-1" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+            <td>
+                <div onclick="setShape(2)" class="shape-box">
+                    <img id="circle-2" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-2" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div onclick="setShape(3)" class="shape-box">
+                    <img id="circle-3" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-3" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+            <td>
+                <div onclick="setShape(4)" class="shape-box">
+                    <img id="circle-4" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-4" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+            <td>
+                <div onclick="setShape(5)" class="shape-box">
+                    <img id="circle-5" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-5" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div onclick="setShape(6)" class="shape-box">
+                    <img id="circle-6" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-6" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+            <td>
+                <div onclick="setShape(7)" class="shape-box">
+                    <img id="circle-7" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-7" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+            <td>
+                <div onclick="setShape(8)" class="shape-box">
+                    <img id="circle-8" class="shape d-none" src="img/circle.png" alt="circle">
+                    <img id="cross-8" id="circle" class="shape d-none" src="img/cross.png" alt="cross">
+                </div>
+            </td>
+        </tr>`
+}
+
 
 /**
  * Sets the current shape (cross or circle) in the chosen field.
@@ -61,15 +157,19 @@ function startGame() {
 function setShape(id) {
     /* If field[id] is undefined and gameOver is not true, do something */
     /* I could also write "if(...  && !gameOver == true)" or "if(... && gameOver == false)" */
-    if (!field[id] && gameOver == false) {
-        if (currentShape == 'cross') {
-            currentShape = 'circle';
+    if (!game[`field${id}`] && game["gameOver"] == false) {
+        if (game["currentShape"] == 'cross') {
+            game["currentShape"] = 'circle';
         } else {
-            currentShape = 'cross';
+            game["currentShape"] = 'cross';
         }
-        field[id] = currentShape;
-        document.getElementById(currentShape + '-' + id).classList.remove('d-none');
-        counter++;
+        game[`field${id}`] = game["currentShape"];
+        document.getElementById(game["currentShape"] + '-' + id).classList.remove('d-none');
+        game["counter"]++;
+
+        /* Save game JSON to backend */
+        saveToBackend();
+        
         checkForWinner();
         showActivePlayer();
     }
@@ -79,7 +179,7 @@ function setShape(id) {
  * Lowers the opacity of the player who is not the turn.
  */
 function showActivePlayer() {
-    if (currentShape == 'circle') {
+    if (game["currentShape"] == 'circle') {
         document.getElementById('player-1').classList.add('player-inactive');
         document.getElementById('player-2').classList.remove('player-inactive');
     } else {
@@ -98,54 +198,56 @@ function checkForWinner() {
     let winner;
     //First Row
     //if(var) means: if this variable is NOT undefined, e.g. if(field[0])
-    if (field[0] == field[1] && field[1] == field[2] && field[0]) {
-        winner = field[0];
+    if (game["field0"] == game["field1"] && game["field1"] == game["field2"] && game["field0"]) {
+        winner = game["field0"];
         document.getElementById('first-row').style.transform = 'scaleX(1.0)';
     }
     //Second Row
-    if (field[3] == field[4] && field[4] == field[5] && field[3]) {
-        winner = field[3];
+    if (game["field3"] == game["field4"] && game["field4"] == game["field5"] && game["field3"]) {
+        winner = game["field3"];
         document.getElementById('second-row').style.transform = 'scaleX(1.0)';
     }
     //Third Row
-    if (field[6] == field[7] && field[7] == field[8] && field[6]) {
-        winner = field[6];
+    if (game["field6"] == game["field7"] && game["field7"] == game["field8"] && game["field6"]) {
+        winner = game["field6"];
         document.getElementById('third-row').style.transform = 'scaleX(1.0)';
     }
     //First Column
-    if (field[0] == field[3] && field[3] == field[6] && field[0]) {
-        winner = field[0];
+    if (game["field0"] == game["field3"] && game["field3"] == game["field6"] && game["field0"]) {
+        winner = game["field0"];
         document.getElementById('first-column').style.transform = 'scaleY(1.0)';
     }
     //Second Column
-    if (field[1] == field[4] && field[4] == field[7] && field[1]) {
-        winner = field[1];
+    if (game["field1"] == game["field4"] && game["field4"] == game["field7"] && game["field1"]) {
+        winner = game["field1"];
         document.getElementById('second-column').style.transform = 'scaleY(1.0)';
     }
     //Third Column
-    if (field[2] == field[5] && field[5] == field[8] && field[2]) {
-        winner = field[2];
+    if (game["field2"] == game["field5"] && game["field5"] == game["field8"] && game["field2"]) {
+        winner = game["field2"];
         document.getElementById('third-column').style.transform = 'scaleY(1.0)';
     }
     //Diagonal From Top Left to Bottom Right
-    if (field[0] == field[4] && field[4] == field[8] && field[0]) {
-        winner = field[0];
+    if (game["field0"] == game["field4"] && game["field4"] == game["field8"] && game["field0"]) {
+        winner = game["field0"];
         document.getElementById('first-diagonal').style.transform = 'scale(1.0) rotate(45deg)';
     }
     //Diagonal From Bottom Left to Top Right
-    if (field[2] == field[4] && field[4] == field[6] && field[2]) {
-        winner = field[2];
+    if (game["field2"] == game["field4"] && game["field4"] == game["field6"] && game["field2"]) {
+        winner = game["field2"];
         document.getElementById('second-diagonal').style.transform = 'scale(1.0) rotate(-45deg)';
     }
 
     /* !! Convert to boolen */
     if (!!winner) {
-        gameOver = true;
+        game["gameOver"] = true;
+        saveToBackend();
         showGameOver(winner);
     }
     //If it's a tie
-    else if (counter == 9) {
-        gameOver = true;
+    else if (game["counter"] == 9) {
+        game["gameOver"] = true;
+        saveToBackend();
         showGameOver(winner);
     }
 }
@@ -195,14 +297,20 @@ function showRestartButton() {
  * Assigns the original values to the variables needed in order to restart the game.
  */
 function restart() {
-    gameOver = false;
-    field = [];
-    if (currentShape == 'circle') {
-        currentShape = 'circle';
+    game["gameOver"] = false;
+    if (game["currentShape"] == 'circle') {
+        game["currentShape"] = 'circle';
     } else {
-        currentShape = 'cross';
+        game["currentShape"] = 'cross';
     }
-    counter = 0;
+    for (let i = 0; i < 9; i++) {
+        game[`field${i}`] = '';
+    }
+    game["counter"] = 0;
+
+    /* Save JSON to backend */
+    saveToBackend();
+
     hideElementsForRestart();
 }
 
@@ -236,9 +344,9 @@ function hideElementsForRestart() {
 /**
  * Toggles game instructions.
  */
-function toggleGameInstructions () {
+function toggleGameInstructions() {
     let gameInstructions = document.getElementById('game-instructions');
-    if(gameInstructions.classList.contains('d-none')) {
+    if (gameInstructions.classList.contains('d-none')) {
         gameInstructions.classList.remove('d-none');
     }
     else {
@@ -253,4 +361,58 @@ function preventReload() {
     var form = document.getElementById("form");
     function handleForm(event) { event.preventDefault(); }
     form.addEventListener('submit', handleForm);
+}
+
+/* Backend */
+
+setURL('http://paul-engerling.developerakademie.com/Modul8/TicTacToe/smallest_backend_ever-master');
+
+let game = {
+    "player1": "Player 1",
+    "player2": "Player 2",
+    //players: [],
+    currentShape: "cross",
+    "field0": field[0],
+    "field1": field[1],
+    "field2": field[2],
+    "field3": field[3],
+    "field4": field[4],
+    "field5": field[5],
+    "field6": field[6],
+    "field7": field[7],
+    "field8": field[8],
+    counter: 0,
+    viewWelcomeScreen: true,     
+    gameOver: false
+};
+
+function saveToBackend() {
+    backend.setItem('game', JSON.stringify(game));
+    console.log(game);
+}
+
+setInterval(getFromBackend, 1000);
+
+async function getFromBackend() {
+    await downloadFromServer();
+    game = JSON.parse(backend.getItem('game')) || [];
+    update();
+}
+
+function deleteFromBackend() {
+    console.log("deleteFromBackend wird aufgerufen!");
+}
+
+function update() {
+    showTable();
+    showNames();
+    if(game["viewWelcomeScreen"] == false) {
+        hideWelcomeScreen();
+    }
+    showActivePlayer();
+    checkForWinner();
+    /* If one player pushed the restart button, the game restarts on both screens. */
+    if(game["gameOver"] == false && game["counter"] == 0) {
+        restart();
+    }
 }
