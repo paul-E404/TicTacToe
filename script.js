@@ -55,7 +55,6 @@ function setNames() {
  * Puts the usernames into the player panel.
  */
 function showNames() {
-    console.log("showNames ausgeführt!");
     document.getElementById('player-1-name').innerHTML = game["player1"];
     document.getElementById('player-2-name').innerHTML = game["player2"];
 };
@@ -81,73 +80,61 @@ function hideWelcomeScreen() {
 }
 
 function showTable() {
-    document.getElementById('playing-field').innerHTML = '';
-    document.getElementById('playing-field').innerHTML = createTable();
+    document.getElementById('playing-field').innerHTML = `
+        <tr>
+            <td>
+                <div onmousedown="setShape(0)" class="shape-box">
+                    <img id="${game["field0"]}-0" class="shape" src="img/${game["field0"]}.png" alt="${game["field0"]}">
+                </div>
+            </td>
+            <td>
+                <div onmousedown="setShape(1)" class="shape-box">
+                    <img id="${game["field1"]}-0" class="shape" src="img/${game["field1"]}.png" alt="${game["field1"]}">
+                </div>
+            </td>
+            <td>
+                <div onmousedown="setShape(2)" class="shape-box">
+                    <img id="${game["field2"]}-0" class="shape" src="img/${game["field2"]}.png" alt="${game["field2"]}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div onmousedown="setShape(3)" class="shape-box">
+                    <img id="${game["field3"]}-0" class="shape" src="img/${game["field3"]}.png" alt="${game["field3"]}">
+                </div>
+            </td>
+            <td>
+                <div onmousedown="setShape(4)" class="shape-box">
+                    <img id="${game["field4"]}-0" class="shape" src="img/${game["field4"]}.png" alt="${game["field4"]}">
+                </div>
+            </td>
+            <td>
+                <div onmousedown="setShape(5)" class="shape-box">
+                    <img id="${game["field5"]}-0" class="shape" src="img/${game["field5"]}.png" alt="${game["field5"]}">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div onmousedown="setShape(6)" class="shape-box">
+                    <img id="${game["field6"]}-0" class="shape" src="img/${game["field6"]}.png" alt="${game["field6"]}">
+                </div>
+            </td>
+            <td>
+                <div onmousedown="setShape(7)" class="shape-box">
+                    <img id="${game["field7"]}-0" class="shape" src="img/${game["field7"]}.png" alt="${game["field7"]}">
+                </div>
+            </td>
+            <td>
+                <div onmousedown="setShape(8)" class="shape-box">
+                    <img id="${game["field8"]}-0" class="shape" src="img/${game["field8"]}.png" alt="${game["field8"]}">
+                </div>
+            </td>
+        </tr>
+    `
 }
 
-function createTable() {
-    return `
-        <tr>
-            <td>
-                <div onclick="setShape(0)" class="shape-box">
-                    <img id="circle-0" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-0" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-            <td>
-                <div onclick="setShape(1)" class="shape-box">
-                    <img id="circle-1" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-1" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-            <td>
-                <div onclick="setShape(2)" class="shape-box">
-                    <img id="circle-2" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-2" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div onclick="setShape(3)" class="shape-box">
-                    <img id="circle-3" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-3" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-            <td>
-                <div onclick="setShape(4)" class="shape-box">
-                    <img id="circle-4" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-4" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-            <td>
-                <div onclick="setShape(5)" class="shape-box">
-                    <img id="circle-5" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-5" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div onclick="setShape(6)" class="shape-box">
-                    <img id="circle-6" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-6" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-            <td>
-                <div onclick="setShape(7)" class="shape-box">
-                    <img id="circle-7" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-7" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-            <td>
-                <div onclick="setShape(8)" class="shape-box">
-                    <img id="circle-8" class="shape d-none" src="img/circle.png" alt="circle">
-                    <img id="cross-8" id="circle" class="shape d-none" src="img/cross.png" alt="cross">
-                </div>
-            </td>
-        </tr>`
-}
 
 
 /**
@@ -164,14 +151,11 @@ function setShape(id) {
             game["currentShape"] = 'cross';
         }
         game[`field${id}`] = game["currentShape"];
-        document.getElementById(game["currentShape"] + '-' + id).classList.remove('d-none');
+        /* document.getElementById(game["currentShape"] + '-' + id).classList.remove('d-none'); */
         game["counter"]++;
 
         /* Save game JSON to backend */
         saveToBackend();
-        
-        checkForWinner();
-        showActivePlayer();
     }
 }
 
@@ -238,11 +222,12 @@ function checkForWinner() {
         document.getElementById('second-diagonal').style.transform = 'scale(1.0) rotate(-45deg)';
     }
 
-    /* !! Convert to boolen */
-    if (!!winner) {
+    /* if(!!winner) {} => !! Convert to boolen */
+    if (winner != undefined) {
         game["gameOver"] = true;
         saveToBackend();
         showGameOver(winner);
+        console.log("show Game Over wird ber die !!winner if bedingung aufgerufen!");
     }
     //If it's a tie
     else if (game["counter"] == 9) {
@@ -262,7 +247,18 @@ function showGameOver(winner) {
     }, 1000);
     showWinner(winner);
     showRestartButton();
+    setTimeout(function() {
+        clearField();
+    }, 1000);
 };
+
+function clearField() {
+    for (let i = 0; i < 9; i++) {
+        game[`field${i}`] = undefined;
+    }
+    game["counter"] = 0;
+    saveToBackend();
+}
 
 /**
  * Shows the winner name or if it's a tie.
@@ -304,13 +300,13 @@ function restart() {
         game["currentShape"] = 'cross';
     }
     for (let i = 0; i < 9; i++) {
-        game[`field${i}`] = '';
+        game[`field${i}`] = undefined;
     }
     game["counter"] = 0;
 
     /* Save JSON to backend */
     saveToBackend();
-
+    console.log("restart funktion wird mehrmals aufgerufen!");
     hideElementsForRestart();
 }
 
@@ -323,12 +319,6 @@ function hideElementsForRestart() {
     document.getElementById('game-over').classList.add('d-none');
     document.getElementById('winner-box').classList.add('d-none');
     document.getElementById('restart-btn').classList.add('d-none');
-
-    //shapes
-    for (let i = 0; i < 9; i++) {
-        document.getElementById('circle-' + i).classList.add('d-none');
-        document.getElementById('cross-' + i).classList.add('d-none');
-    }
 
     //winner lines
     document.getElementById('first-row').style.transform = 'scaleX(0)';
@@ -382,37 +372,41 @@ let game = {
     "field7": field[7],
     "field8": field[8],
     counter: 0,
-    viewWelcomeScreen: true,     
+    viewWelcomeScreen: true,
     gameOver: false
 };
 
+
 function saveToBackend() {
     backend.setItem('game', JSON.stringify(game));
-    console.log(game);
 }
 
 setInterval(getFromBackend, 1000);
 
+/**
+ * Loads the current saved JSON from backend.
+ */
 async function getFromBackend() {
     await downloadFromServer();
     game = JSON.parse(backend.getItem('game')) || [];
     update();
 }
 
-function deleteFromBackend() {
+/* function deleteFromBackend() {
     console.log("deleteFromBackend wird aufgerufen!");
-}
+} */
+
 
 function update() {
     showTable();
     showNames();
-    if(game["viewWelcomeScreen"] == false) {
+    if (game["viewWelcomeScreen"] == false) {
         hideWelcomeScreen();
     }
     showActivePlayer();
     checkForWinner();
     /* If one player pushed the restart button, the game restarts on both screens. */
-    if(game["gameOver"] == false && game["counter"] == 0) {
+    if (game["gameOver"] == false && game["counter"] == 0) {
         restart();
     }
 }
