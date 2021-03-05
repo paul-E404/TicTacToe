@@ -60,7 +60,7 @@ function showNames() {
 };
 
 /**
- * Executes some start functions when clicking the let's play button.
+ * Executes the start functions when clicking the let's play button.
  */
 function startGame() {
     showNames();
@@ -74,11 +74,14 @@ function startGame() {
 function hideWelcomeScreen() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('navbar-text-start').classList.remove('navbar-text-start');
-    /* Save changed game JSON to backend. */
     game["viewWelcomeScreen"] = false;
+    /* Save changed game JSON to backend. */
     saveToBackend();
 }
 
+/**
+ * Shows the playing field with the current shapes on it.
+ */
 function showTable() {
     document.getElementById('playing-field').innerHTML = `
         <tr>
@@ -142,7 +145,7 @@ function showTable() {
  * @param  {number} id - Field Number (0-8).
  */
 function setShape(id) {
-    /* If field[id] is undefined and gameOver is not true, do something */
+    /* If field[id] is undefined ("empty") and gameOver is not true, do something */
     /* I could also write "if(...  && !gameOver == true)" or "if(... && gameOver == false)" */
     if (!game[`field${id}`] && game["gameOver"] == false) {
         if (game["currentShape"] == 'cross') {
@@ -151,10 +154,9 @@ function setShape(id) {
             game["currentShape"] = 'cross';
         }
         game[`field${id}`] = game["currentShape"];
-        /* document.getElementById(game["currentShape"] + '-' + id).classList.remove('d-none'); */
         game["counter"]++;
 
-        /* Save game JSON to backend */
+        /* Save changed game JSON to backend. */
         saveToBackend();
     }
 }
@@ -175,6 +177,7 @@ function showActivePlayer() {
 /**
  * Checks if there are three equal shapes in one row, column or diagonal.
  * If so, this value is is assigned to the winner variable.
+ * The winner line appears with an animation over the three equal shapes.
  * If the winner variable is set or the counter has the value 9 (all fields are set), the game is over.
  */
 function checkForWinner() {
@@ -222,12 +225,11 @@ function checkForWinner() {
         document.getElementById('second-diagonal').style.transform = 'scale(1.0) rotate(-45deg)';
     }
 
-    /* if(!!winner) {} => !! Convert to boolen */
+    //The variable winner is set with cross or circle.
     if (winner != undefined) {
         game["gameOver"] = true;
         saveToBackend();
         showGameOver(winner);
-        console.log("show Game Over wird ber die !!winner if bedingung aufgerufen!");
     }
     //If it's a tie
     else if (game["counter"] == 9) {
@@ -252,11 +254,16 @@ function showGameOver(winner) {
     }, 1000);
 };
 
+/**
+ * Sets all fields to undefined and the game counter to 0.
+ */
 function clearField() {
     for (let i = 0; i < 9; i++) {
         game[`field${i}`] = undefined;
     }
     game["counter"] = 0;
+
+    /* Save changed JSON to backend */
     saveToBackend();
 }
 
@@ -299,19 +306,15 @@ function restart() {
     } else {
         game["currentShape"] = 'cross';
     }
-    for (let i = 0; i < 9; i++) {
-        game[`field${i}`] = undefined;
-    }
-    game["counter"] = 0;
 
-    /* Save JSON to backend */
+    /* Save changed JSON to backend */
     saveToBackend();
-    console.log("restart funktion wird mehrmals aufgerufen!");
+   
     hideElementsForRestart();
 }
 
 /**
- * Hides the game over screen and clears the playing field.
+ * Hides the game over screen with all its elements and clears the playing field from winner lines.
  */
 function hideElementsForRestart() {
 
@@ -353,14 +356,17 @@ function preventReload() {
     form.addEventListener('submit', handleForm);
 }
 
-/* Backend */
+
+/* 
+BACKEND - Multiplayer Implementation 
+*/
 
 setURL('http://paul-engerling.developerakademie.com/Modul8/TicTacToe/smallest_backend_ever-master');
+
 
 let game = {
     "player1": "Player 1",
     "player2": "Player 2",
-    //players: [],
     currentShape: "cross",
     "field0": field[0],
     "field1": field[1],
@@ -377,6 +383,9 @@ let game = {
 };
 
 
+/**
+ * Saves the current JSON with all changed values to backend.
+ */
 function saveToBackend() {
     backend.setItem('game', JSON.stringify(game));
 }
@@ -392,18 +401,19 @@ async function getFromBackend() {
     update();
 }
 
-/* function deleteFromBackend() {
-    console.log("deleteFromBackend wird aufgerufen!");
-} */
-
-
+/**
+ * Updates all important functions regularly (interval).
+ * This is important to see the current status of the game on both user screens.
+ */
 function update() {
     showTable();
     showNames();
     if (game["viewWelcomeScreen"] == false) {
         hideWelcomeScreen();
     }
+    /* If one player filled out the input fields with names and clicked the let's play button, the names will appear in the player panel on both screens. */
     showActivePlayer();
+    /* If one of both players made 3 shapes in a row, column or diagonal. */
     checkForWinner();
     /* If one player pushed the restart button, the game restarts on both screens. */
     if (game["gameOver"] == false && game["counter"] == 0) {
