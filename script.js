@@ -47,17 +47,42 @@ function setNames() {
 
     /* Save JSON to backend */
     saveToBackend();
-
     startGame();
 }
 
 /**
- * Puts the usernames into the player panel.
+ * Puts the usernames into the player panel and into the buttons for the name choice.
  */
 function showNames() {
     document.getElementById('player-1-name').innerHTML = game["player1"];
     document.getElementById('player-2-name').innerHTML = game["player2"];
+    document.getElementById('player-1-btn').innerHTML = game["player1"];
+    document.getElementById('player-2-btn').innerHTML = game["player2"];
 };
+
+/**
+ * Saves the name to local storage on which the user has clicked.
+ */
+function saveNameToLocalStorage(number) {
+    let name = document.getElementById(`player-${number}-btn`).innerText;
+    localStorage.setItem('currentPlayer', name);
+    hideNameChoiceScreen();
+}
+
+/**
+ * Hides the name choice screen after the player chose his or her name.
+ */
+function hideNameChoiceScreen() {
+    document.getElementById('name-choice-screen').classList.add('d-none');
+}
+
+/**
+ * Loads the saved username from local storage.
+ */
+function getNameFromLocalStorage() {
+    return localStorage.getItem('currentPlayer');
+}
+
 
 /**
  * Executes the start functions when clicking the let's play button.
@@ -86,51 +111,51 @@ function showTable() {
     document.getElementById('playing-field').innerHTML = `
         <tr>
             <td>
-                <div onmousedown="setShape(0)" class="shape-box">
+                <div onmousedown="determineTurn(0)" class="shape-box">
                     <img id="${game["field0"]}-0" class="shape" src="img/${game["field0"]}.png" alt="${game["field0"]}">
                 </div>
             </td>
             <td>
-                <div onmousedown="setShape(1)" class="shape-box">
+                <div onmousedown="determineTurn(1)" class="shape-box">
                     <img id="${game["field1"]}-0" class="shape" src="img/${game["field1"]}.png" alt="${game["field1"]}">
                 </div>
             </td>
             <td>
-                <div onmousedown="setShape(2)" class="shape-box">
+                <div onmousedown="determineTurn(2)" class="shape-box">
                     <img id="${game["field2"]}-0" class="shape" src="img/${game["field2"]}.png" alt="${game["field2"]}">
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <div onmousedown="setShape(3)" class="shape-box">
+                <div onmousedown="determineTurn(3)" class="shape-box">
                     <img id="${game["field3"]}-0" class="shape" src="img/${game["field3"]}.png" alt="${game["field3"]}">
                 </div>
             </td>
             <td>
-                <div onmousedown="setShape(4)" class="shape-box">
+                <div onmousedown="determineTurn(4)" class="shape-box">
                     <img id="${game["field4"]}-0" class="shape" src="img/${game["field4"]}.png" alt="${game["field4"]}">
                 </div>
             </td>
             <td>
-                <div onmousedown="setShape(5)" class="shape-box">
+                <div onmousedown="determineTurn(5)" class="shape-box">
                     <img id="${game["field5"]}-0" class="shape" src="img/${game["field5"]}.png" alt="${game["field5"]}">
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <div onmousedown="setShape(6)" class="shape-box">
+                <div onmousedown="determineTurn(6)" class="shape-box">
                     <img id="${game["field6"]}-0" class="shape" src="img/${game["field6"]}.png" alt="${game["field6"]}">
                 </div>
             </td>
             <td>
-                <div onmousedown="setShape(7)" class="shape-box">
+                <div onmousedown="determineTurn(7)" class="shape-box">
                     <img id="${game["field7"]}-0" class="shape" src="img/${game["field7"]}.png" alt="${game["field7"]}">
                 </div>
             </td>
             <td>
-                <div onmousedown="setShape(8)" class="shape-box">
+                <div onmousedown="determineTurn(8)" class="shape-box">
                     <img id="${game["field8"]}-0" class="shape" src="img/${game["field8"]}.png" alt="${game["field8"]}">
                 </div>
             </td>
@@ -138,7 +163,22 @@ function showTable() {
     `
 }
 
-
+/**
+ * Determines who is the turn.
+ * Meanwhile, the other player cannot set a shape. If he or she does so, a short alert appears.
+ * @param  {number} id - Field Number (0-8).
+ */
+function determineTurn(id) {
+    let currentShape = game["currentShape"];
+    let player1 = game["player1"];
+    let player2 = game["player2"];
+    let currentPlayer = getNameFromLocalStorage('currentPlayer');
+    if (currentShape == "cross" && currentPlayer == player1 || currentShape == "circle" && currentPlayer == player2){
+        setShape(id);
+    } else {
+        alert("It's not your turn buddy! :)");
+    }
+}
 
 /**
  * Sets the current shape (cross or circle) in the chosen field.

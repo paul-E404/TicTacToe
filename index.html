@@ -28,10 +28,10 @@
             <form id="form" action="" onsubmit="setNames(); return false">
                 <span>Enter your names:</span><br>
                 <label for="player-1">Player 1:</label>
-                <input class="input-field" id="input-name1" type="text" placeholder="name player 1" name="player-1"
+                <input class="input-field" id="input-name1" type="text" value="Player 1" name="player-1"
                     required><br>
                 <label for="player-2">Player 2:</label>
-                <input class="input-field" id="input-name2" type="text" placeholder="name player 2" name="player-2"
+                <input class="input-field" id="input-name2" type="text" value="Player 2" name="player-2"
                     required>
                 <button type="submit" class="play-btn">Let's play!</button>
                 <span onclick="startGame();" id="go-on-without-names" class="go-on-without-names">Go on without
@@ -89,6 +89,14 @@
             <div class="game-instructions-content">
                 <span>Try to place three equal shapes in a row, a column or a diagonal. The first player to do this wins the game.</span><br>
                 <button onclick="toggleGameInstructions()" type="button" class="play-btn">Let's play!</button>
+            </div>
+        </div>
+
+        <div id="name-choice-screen" class="game-instructions">
+            <div class="name-choice">
+                <span>Which player are you?</span><br>
+                <button onclick="saveNameToLocalStorage(1)" id="player-1-btn" type="button" class="play-btn"></button>
+                <button onclick="saveNameToLocalStorage(2)" id="player-2-btn" type="button" class="play-btn"></button>
             </div>
         </div>
 
